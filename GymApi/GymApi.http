@@ -1,0 +1,29 @@
+@GymApi_HostAddress = http://localhost:5225
+
+GET {{GymApi_HostAddress}}/api/members/7 
+Accept: application/json
+
+###
+
+GET {{GymApi_HostAddress}}/api/memberroutines/7
+Accept: application/json
+
+###
+
+GET {{GymApi_HostAddress}}/api/bookingclasses/
+Accept: application/json
+
+###
+
+POST {{GymApi_HostAddress}}/api/members/login
+Content-Type: application/json
+
+
+
+###
+
+GET {{GymApi_HostAddress}}/api/asistencias/7
+Accept: application/json
+
+###
+
