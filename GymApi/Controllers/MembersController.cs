@@ -72,17 +72,20 @@ namespace GimnasioAPI.Controllers
                 // Consulta SQL simple
                 const string sql = @"
             SELECT 
-                M.nombre, M.apellido, M.dni, M.fechaNacimiento,
+                M.nombre, M.apellido, M.dni, M.fechaNacimiento, 
                 G.nombreGenero, M.miembroEmail,
                 M.passwordHash, M.fotoPerfil,
                 M.fechaDeMembresia,
-                (
-                    SELECT MAX(V.fechaFin) 
-                    FROM VentaMembresia V 
-                    WHERE V.idMiembro = M.idMiembro
-                ) AS FechaVencimientoMembresia
+                ULTIMA_VENTA.fechaInicio AS FechaInicioMembresia,
+                ULTIMA_VENTA.fechaFin AS FechaVencimientoMembresia
             FROM Miembros M
             INNER JOIN Genero G ON M.idGenero = G.idGenero
+            OUTER APPLY (
+                SELECT TOP 1 V.fechaInicio, V.fechaFin
+                FROM VentaMembresia V
+                WHERE V.idMiembro = M.idMiembro
+                ORDER BY V.fechaFin DESC -- Traemos la venta con el vencimiento más lejano
+            ) AS ULTIMA_VENTA
             WHERE M.idMiembro = @id";
 
 
