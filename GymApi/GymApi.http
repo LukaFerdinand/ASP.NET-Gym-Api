@@ -1,11 +1,11 @@
 @GymApi_HostAddress = http://localhost:5225
 
-GET {{GymApi_HostAddress}}/api/members/7 
+GET {{GymApi_HostAddress}}/api/members/ 
 Accept: application/json
 
 ###
 
-GET {{GymApi_HostAddress}}/api/memberroutines/7
+GET {{GymApi_HostAddress}}/api/memberroutines/
 Accept: application/json
 
 ###
@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ###
 
-GET {{GymApi_HostAddress}}/api/asistencias/7
+GET {{GymApi_HostAddress}}/api/asistencias/
 Accept: application/json
 
 ###

@@ -28,7 +28,7 @@ namespace GimnasioAPI.Controllers
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 // Aquí pegas la consulta JOIN que hicimos antes
-                string sql = "SELECT DISTINCT M.idMiembro, M.nombre AS Miembro, TR.nombre AS NombreRutina,  RD.diaSemana,  E.nombre AS Ejercicio,   RD.series,   RD.repeticiones, RD.nota FROM Miembros M INNER JOIN MiembroRutinaAsignada MRA ON M.idMiembro = MRA.idMiembro INNER JOIN TipoRutina TR ON MRA.idTipoRutina = TR.idTipoRutina INNER JOIN RutinaDetalle RD ON TR.idTipoRutina = RD.idTipoRutina INNER JOIN Ejercicios E ON RD.idEjercicio = E.idEjercicio WHERE M.idMiembro = @id;"
+                string sql = "SELECT DISTINCT M.idMiembro, M.nombre AS Miembro, TR.nombre AS NombreRutina,  RD.diaSemana,  E.nombre AS Ejercicio, E.grupoMuscular AS Musculo,  RD.series,   RD.repeticiones, RD.nota FROM Miembros M INNER JOIN MiembroRutinaAsignada MRA ON M.idMiembro = MRA.idMiembro INNER JOIN TipoRutina TR ON MRA.idTipoRutina = TR.idTipoRutina INNER JOIN RutinaDetalle RD ON TR.idTipoRutina = RD.idTipoRutina INNER JOIN Ejercicios E ON RD.idEjercicio = E.idEjercicio WHERE M.idMiembro = @id;"
                     ;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", id);
@@ -42,6 +42,7 @@ namespace GimnasioAPI.Controllers
                         {
                             Miembro = reader["Miembro"].ToString(),
                             NombreRutina = reader["NombreRutina"].ToString(),
+                            Musculo = reader["Musculo"].ToString(),
                             DiaSemana = reader["diaSemana"].ToString(),
                             Ejercicio = reader["Ejercicio"].ToString(),
                             Series = Convert.ToInt32(reader["series"]),
